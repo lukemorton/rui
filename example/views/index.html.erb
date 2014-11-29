@@ -1,0 +1,7 @@
+<%= login_form(action: login_path, user: @user) %>
+
+<div class="news">
+  <% @posts.each do |post| %>
+    <%= cms_post(post: post) %>
+  <% end %>
+</div>
