@@ -4,17 +4,36 @@
 #     weight: 200;
 #   }
 # }
-# %type__standard {
+# %type__title {
 #   @extend %type__standard;
 
 #   font: {
 #     family: Arial;
-#     weight: 200;
 #   }
 # }
-# %type__bold {
+# %type__heavy {
 #   font: {
 #     weight: 400;
+#   }
+# }
+# %type__emphasis {
+#   font: {
+#     style: italic;
+#   }
+# }
+# %type__small {
+#   font: {
+#     size: 0.8em;
+#   }
+# }
+# %type__important {
+#   font: {
+#     size: 1.6em;
+#   }
+# }
+# %type__large {
+#   font: {
+#     size: 3em;
 #   }
 # }
 StyleSheet.new(:type) do
