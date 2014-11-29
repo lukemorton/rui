@@ -7,6 +7,20 @@ to mean reinventing the wheel so that's what we'll do.
 
 Component based style definition. Component based structure definition. Still
 separate like CSS and HTML. Intelligently coupled at point of use.
+Written in Ruby.
+
+Although we all acknowledge that CSS and HTML should be defined separately,
+browsers in fact couple the two at render time. There are a number of
+optimisations to be had if we couple the two just before sending them to the
+browser. There are also other benefits that come from using a language to
+define style. Here is a list of benefits RUI could provide:
+
+  - Only compile CSS that is used in HTML
+  - Only add classes to HTML elements that have styles defined
+  - No need to define classes, define components instead
+  - Never worry about applying styles to the wrong elements
+  - Class minification for production
+  - Works with rails
 
 ## Example
 
