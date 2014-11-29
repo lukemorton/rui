@@ -1,4 +1,4 @@
-# RUI
+# rui
 
 Someone told me it's okay to build UI/UX in your favourite language. I took that
 to mean reinventing the wheel so that's what we'll do.
@@ -13,7 +13,7 @@ Although we all acknowledge that CSS and HTML should be defined separately,
 browsers in fact couple the two at render time. There are a number of
 optimisations to be had if we couple the two just before sending them to the
 browser. There are also other benefits that come from using a language to
-define style. Here is a list of benefits RUI could provide:
+define style. Here is a list of benefits rui could provide:
 
   - Only compile CSS that is used in HTML
   - Only add classes to HTML elements that have styles defined
