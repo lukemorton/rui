@@ -20,10 +20,25 @@ describe Stylesheet do
           header do
             title(font: '400 16px Arial')
           end
+
+          intro(margin: '2em')
+
+          content(margin: '1em 0 0 0') do
+            p(margin: '1em 0 0 0')
+          end
+
+          footer(margin: '2em 0 0 0') do
+            cite(font: { style: :italic })
+          end
         end
       end
 
-      it { is_expected.to include(header: { title: [{ font: '400 16px Arial' }] }) }
+      it { is_expected.to include(header: [{ title: [{ font: '400 16px Arial' }] }]) }
+      it { is_expected.to include(intro: [{ margin: '2em' }]) }
+      it { is_expected.to include(content: [{ margin: '1em 0 0 0' },
+                                            { p: [{ margin: '1em 0 0 0' }] }]) }
+      it { is_expected.to include(footer: [{ margin: '2em 0 0 0' },
+                                            { cite: [{ font: { style: :italic } }] }]) }
     end
   end
 end
