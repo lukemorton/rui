@@ -38,7 +38,7 @@ describe Stylesheet do
       it { is_expected.to include(content: [{ margin: '1em 0 0 0' },
                                             { p: [{ margin: '1em 0 0 0' }] }]) }
       it { is_expected.to include(footer: [{ margin: '2em 0 0 0' },
-                                            { cite: [{ font: { style: :italic } }] }]) }
+                                           { cite: [{ font: { style: :italic } }] }]) }
     end
   end
 end
