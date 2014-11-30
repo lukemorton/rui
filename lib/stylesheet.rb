@@ -5,7 +5,8 @@ class Stylesheet
     end
 
     def method_missing(method, *style, &block)
-      self[method] = style
+      self[method] = style unless style.empty?
+      merge!(method => Context.new(&block)) if block_given?
     end
   end
 
