@@ -1,4 +1,4 @@
-require_relative '../lib/stylesheet'
+require_relative '../lib/style_sheet'
 
 describe StyleSheet do
   context 'when compiled to bytecode' do
