@@ -9,6 +9,8 @@ describe StyleSheetCompiler do
       let(:stylesheet) do
         StyleSheet.new(:cms_post) do
           title(font: '400 16px Arial')
+
+          intro(margin: '2em 0 0 0')
         end
       end
 
@@ -18,7 +20,8 @@ describe StyleSheetCompiler do
 
       subject { compiler.compile }
 
-      it { is_expected.to eq(".cms_post__title {\nfont: 400 16px Arial;\n}") }
+      it { is_expected.to include(".cms_post__title {\nfont: 400 16px Arial;\n}") }
+      it { is_expected.to include(".cms_post__intro {\nmargin: 2em 0 0 0;\n}") }
     end
   end
 end
