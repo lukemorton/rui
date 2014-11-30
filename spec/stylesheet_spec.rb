@@ -6,7 +6,7 @@ describe Stylesheet do
 
     context 'single definition' do
       let(:stylesheet) do
-        described_class.new(:cms_post) do
+        Stylesheet.new(:cms_post) do
           title(font: '400 16px Arial')
         end
       end
@@ -16,7 +16,7 @@ describe Stylesheet do
 
     context 'nested definition' do
       let(:stylesheet) do
-        described_class.new(:cms_post) do
+        Stylesheet.new(:cms_post) do
           header do
             title(font: '400 16px Arial')
           end
