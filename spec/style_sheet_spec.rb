@@ -11,7 +11,7 @@ describe StyleSheet do
         end
       end
 
-      it { is_expected.to include(title: [{ font: '400 16px Arial' }]) }
+      it { is_expected.to include(title: { properties: { font: '400 16px Arial' } }) }
     end
 
     context 'nested definition' do
@@ -33,12 +33,16 @@ describe StyleSheet do
         end
       end
 
-      it { is_expected.to include(header: [{ title: [{ font: '400 16px Arial' }] }]) }
-      it { is_expected.to include(intro: [{ margin: '2em' }]) }
-      it { is_expected.to include(content: [{ margin: '1em 0 0 0' },
-                                            { p: [{ margin: '1em 0 0 0' }] }]) }
-      it { is_expected.to include(footer: [{ margin: '2em 0 0 0' },
-                                           { cite: [{ font: { style: :italic } }] }]) }
+      it { is_expected.to include(header: { properties: {},
+                                            children: { title: { properties: { font: '400 16px Arial' } } } }) }
+
+      it { is_expected.to include(intro: { properties: { margin: '2em' } }) }
+
+      it { is_expected.to include(content: { properties: { margin: '1em 0 0 0' },
+                                             children: { p: { properties: { margin: '1em 0 0 0' } } } }) }
+
+      it { is_expected.to include(footer: { properties: { margin: '2em 0 0 0' },
+                                            children: { cite: { properties: { font: { style: :italic } } } } }) }
     end
   end
 end

@@ -14,11 +14,11 @@ class StyleSheetCompiler
   private
 
   def compile_sheet(sheet)
-    sheet.to_bytecode.map { |k, v| define_rule(sheet.name, k, v) }
+    sheet.to_bytecode.map { |k, v| define_rule(sheet.name, k, v[:properties]) }
   end
 
-  def define_rule(ns, k, v)
-    ".#{ns}__#{k} {\n#{define_properties(v[0])}\n}"
+  def define_rule(ns, element, properties)
+    ".#{ns}__#{element} {\n#{define_properties(properties)}\n}"
   end
 
   def define_properties(properties)

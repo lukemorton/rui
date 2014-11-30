@@ -4,22 +4,21 @@ class StyleSheet
       instance_eval(&block) if block_given?
     end
 
-    def p(*styles, &block)
+    def p(styles, &block)
       add_style(:p, styles, &block)
     end
 
-    def method_missing(method, *styles, &block)
-      add_style(method, styles, &block)
+    def method_missing(method, *args, &block)
+      add_style(method, args.first, &block)
     end
 
     private
 
     def add_style(ns, styles, &block)
-      self[ns] = styles unless styles.empty?
+      self[ns] = { properties: styles || {} }
 
       if block_given?
-        self[ns] = [] unless has_key?(ns)
-        self[ns] << Context.new(&block)
+        self[ns][:children] = Context.new(&block)
       end
     end
   end
