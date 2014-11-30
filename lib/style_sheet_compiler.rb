@@ -14,11 +14,20 @@ class StyleSheetCompiler
   private
 
   def compile_sheet(sheet)
-    sheet.to_bytecode.map { |k, v| define_rule(sheet.name, k, v[:properties]) }
+    sheet.to_bytecode.map { |k, v| define_rule(sheet.name, k, v) }
   end
 
-  def define_rule(ns, element, properties)
-    ".#{ns}__#{element} {\n#{define_properties(properties)}\n}"
+  def define_rule(ns, element, properties_and_children)
+    properties, children = properties_and_children.values_at(:properties, :children)
+    rule = ".#{ns}__#{element} {\n#{define_properties(properties)}\n}"
+
+    unless children.nil?
+      children.each do |child_element, child_properties_and_children|
+        rule << "\n" << define_rule("#{ns}__#{element}", child_element, child_properties_and_children)
+      end
+    end
+
+    rule
   end
 
   def define_properties(properties)
