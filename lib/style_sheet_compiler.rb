@@ -31,6 +31,20 @@ class StyleSheetCompiler
   end
 
   def define_properties(properties)
-    properties.map { |p, v| "#{p}: #{v};" }.join("\n")
+    expand_properties(properties).map { |p, v| "#{p}: #{v};" }.join("\n")
+  end
+
+  def expand_properties(properties)
+    properties.reduce({}) do |properties, (property, value)|
+      if value.is_a?(Hash)
+        sub_properties = value.reduce({}) do |sub_properties, (sub_property, value)|
+          sub_properties.merge("#{property}-#{sub_property}" => value)
+        end
+
+        properties.merge(sub_properties)
+      else
+        properties.merge(property => value)
+      end
+    end
   end
 end
