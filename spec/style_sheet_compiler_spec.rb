@@ -42,7 +42,7 @@ describe StyleSheetCompiler do
       let(:type_style_sheet) do
         StyleSheet.new(:type) do
           abstract(:standard, font: '400 16px Arial')
-          abstract(:title, font: { family: 'Georgia' })
+          abstract(:title, font: { family: 'Georgia' }).merge!(extends: { type: :standard })
           abstract(:large, font: { size: '3em' })
         end
       end
@@ -59,7 +59,7 @@ describe StyleSheetCompiler do
         compiler << page_style_sheet
       end
 
-      it { is_expected.to include(".page__title {\nfont-family: Georgia;\nfont-size: 3em;\n}") }
+      it { is_expected.to include(".page__title {\nfont: 400 16px Arial;\nfont-family: Georgia;\nfont-size: 3em;\n}") }
       it { is_expected.to include(".page__content {\nfont: 400 16px Arial;\n}") }
     end
   end

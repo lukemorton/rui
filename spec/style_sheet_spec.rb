@@ -55,6 +55,6 @@ describe StyleSheet do
       end
     end
 
-    it { is_expected.to include(standard: { font: '400 16px Arial' }) }
+    it { is_expected.to include(standard: { properties: { font: '400 16px Arial' } }) }
   end
 end

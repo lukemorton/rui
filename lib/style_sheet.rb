@@ -7,10 +7,8 @@ class StyleSheet
       instance_eval(&block) if block_given?
     end
 
-    def abstract(abstraction, styles)
-      { abstraction => styles }.tap do |abstraction|
-        @abstractions.merge!(abstraction)
-      end
+    def abstract(abstraction, properties)
+      @abstractions[abstraction] = { properties: properties }
     end
 
     def p(properties, &block)
