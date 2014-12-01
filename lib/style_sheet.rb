@@ -1,11 +1,20 @@
 class StyleSheet
   class Context < Hash
+    attr_reader :abstractions
+
     def initialize(&block)
+      @abstractions = {}
       instance_eval(&block) if block_given?
     end
 
-    def p(styles, &block)
-      add_style(:p, styles, &block)
+    def abstract(abstraction, styles)
+      { abstraction => styles }.tap do |abstraction|
+        @abstractions.merge!(abstraction)
+      end
+    end
+
+    def p(properties, &block)
+      add_style(:p, properties, &block)
     end
 
     def method_missing(method, *args, &block)
@@ -14,12 +23,14 @@ class StyleSheet
 
     private
 
-    def add_style(ns, styles, &block)
-      self[ns] = { properties: styles || {} }
+    def add_style(ns, properties, &block)
+      styles = { properties: properties || {} }
 
       if block_given?
-        self[ns][:children] = Context.new(&block)
+        styles[:children] = Context.new(&block)
       end
+
+      self[ns] = styles
     end
   end
 
@@ -32,5 +43,9 @@ class StyleSheet
 
   def to_bytecode
     @context
+  end
+
+  def abstractions
+    @context.abstractions
   end
 end

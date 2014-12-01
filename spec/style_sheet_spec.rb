@@ -45,4 +45,16 @@ describe StyleSheet do
                                             children: { cite: { properties: { font: { style: :italic } } } } }) }
     end
   end
+
+  context 'abstract definition' do
+    subject { stylesheet.abstractions }
+
+    let(:stylesheet) do
+      StyleSheet.new(:type) do
+        abstract(:standard, font: '400 16px Arial')
+      end
+    end
+
+    it { is_expected.to include(standard: { font: '400 16px Arial' }) }
+  end
 end

@@ -1,10 +1,12 @@
 class StyleSheetCompiler
   def initialize
     @sheets = []
+    @abstractions = {}
   end
 
   def <<(sheet)
     @sheets << sheet
+    @abstractions.merge!(sheet.name => sheet.abstractions)
   end
 
   def compile
@@ -14,20 +16,43 @@ class StyleSheetCompiler
   private
 
   def compile_sheet(sheet)
-    sheet.to_bytecode.map { |k, v| define_rule(sheet.name, k, v) }
+    sheet.to_bytecode.map { |element, styles| define_rule(sheet.name, element, styles) }
   end
 
-  def define_rule(ns, element, properties_and_children)
-    properties, children = properties_and_children.values_at(:properties, :children)
-    rule = ".#{ns}__#{element} {\n#{define_properties(properties)}\n}"
+  def define_rule(ns, element, styles)
+    rule = [".#{ns}__#{element} {"]
 
-    unless children.nil?
-      children.each do |child_element, child_properties_and_children|
-        rule << "\n" << define_rule("#{ns}__#{element}", child_element, child_properties_and_children)
+    unless styles[:extends].nil?
+      rule << define_abstract_properties(styles[:extends])
+    end
+
+    unless styles[:properties].empty?
+      rule << define_properties(styles[:properties])
+    end
+
+    rule << '}'
+
+    unless styles[:children].nil?
+      styles[:children].each do |child_element, child_properties_and_children|
+        rule << define_rule("#{ns}__#{element}", child_element, child_properties_and_children)
       end
     end
 
-    rule
+    rule.join("\n")
+  end
+
+  def define_abstract_properties(abstractions)
+    abstractions.map do |abstract_ss, abstractions|
+      if @abstractions[abstract_ss]
+        abstractions = [abstractions] unless abstractions.is_a?(Array)
+
+        abstractions.map do |abstraction|
+          if @abstractions[abstract_ss][abstraction]
+            define_properties(@abstractions[abstract_ss][abstraction])
+          end
+        end
+      end
+    end.flatten.join("\n")
   end
 
   def define_properties(properties)
