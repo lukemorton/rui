@@ -25,17 +25,10 @@ class StyleSheetCompiler
   end
 
   def define_rule(ns, element, styles)
-    rule = [".#{ns}__#{element} {"]
+    abstract_properties = abstraction_resolver.properties(styles[:extends])
+    properties = define_properties(styles[:properties].merge(abstract_properties))
 
-    unless styles[:extends].nil?
-      rule << define_abstract_properties(styles[:extends])
-    end
-
-    unless styles[:properties].empty?
-      rule << define_properties(styles[:properties])
-    end
-
-    rule << '}'
+    rule = [".#{ns}__#{element} {\n#{properties}\n}"]
 
     unless styles[:children].nil?
       styles[:children].each do |child_element, child_styles|
@@ -44,20 +37,6 @@ class StyleSheetCompiler
     end
 
     rule.join("\n")
-  end
-
-  def define_abstract_properties(abstractions)
-    abstractions.map do |abstract_ss, abstractions|
-      if @abstractions[abstract_ss]
-        abstractions = [abstractions] unless abstractions.is_a?(Array)
-
-        abstractions.map do |abstraction|
-          if @abstractions[abstract_ss][abstraction]
-            define_properties(@abstractions[abstract_ss][abstraction][:properties])
-          end
-        end
-      end
-    end.flatten.join("\n")
   end
 
   def define_properties(properties)

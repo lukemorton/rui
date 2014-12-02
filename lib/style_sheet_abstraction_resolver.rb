@@ -22,6 +22,12 @@ class StyleSheetAbstractionResolver
     end
   end
 
+  def properties(extensions)
+    (extensions || {}).reduce({}) do |properties, (abstract_ss, abstract_names)|
+      properties.merge(properties_from_style_sheet(abstract_ss, abstract_names))
+    end
+  end
+
   private
 
   def extended_properties(abstractions)
@@ -41,6 +47,16 @@ class StyleSheetAbstractionResolver
       else
         extended_properties
       end
+    end
+  end
+
+  def properties_from_style_sheet(style_sheet, abstract_names)
+    unless abstract_names.is_a?(Array)
+      abstract_names = [abstract_names]
+    end
+
+    abstract_names.reduce({}) do |properties, abstract_name|
+      properties.merge(@resolved_abstractions[style_sheet][abstract_name][:properties])
     end
   end
 end
