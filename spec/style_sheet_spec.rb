@@ -42,7 +42,7 @@ describe StyleSheet do
                                              children: { p: { properties: { margin: '1em 0 0 0' } } } }) }
 
       it { is_expected.to include(footer: { properties: { margin: '2em 0 0 0' },
-                                            children: { cite: { properties: { font: { style: :italic } } } } }) }
+                                            children: { cite: { properties: { 'font-style' => :italic } } } }) }
     end
   end
 

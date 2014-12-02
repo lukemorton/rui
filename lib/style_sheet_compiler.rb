@@ -20,7 +20,7 @@ class StyleSheetCompiler
     @abstractions = @abstractions.reduce({}) do |resolved_stylesheets, (abstract_ss, abstractions)|
       resolved_abstractions = abstractions.reduce({}) do |resolved_abstractions, (abstraction, styles)|
         if styles[:extends]
-          properties = extended_properties(styles[:extends]).merge(expand_properties(styles[:properties]))
+          properties = extended_properties(styles[:extends]).merge(styles[:properties])
           resolved_abstractions.merge(abstraction => { properties: properties })
         else
           resolved_abstractions.merge(abstraction => styles)
@@ -92,20 +92,6 @@ class StyleSheetCompiler
   end
 
   def define_properties(properties)
-    expand_properties(properties).map { |p, v| "#{p}: #{v};" }.join("\n")
-  end
-
-  def expand_properties(properties)
-    properties.reduce({}) do |properties, (property, value)|
-      if value.is_a?(Hash)
-        sub_properties = value.reduce({}) do |sub_properties, (sub_property, value)|
-          sub_properties.merge("#{property}-#{sub_property}" => value)
-        end
-
-        properties.merge(sub_properties)
-      else
-        properties.merge(property => value)
-      end
-    end
+    properties.map { |p, v| "#{p}: #{v};" }.join("\n")
   end
 end

@@ -8,7 +8,7 @@ class StyleSheet
     end
 
     def abstract(abstraction, properties)
-      @abstractions[abstraction] = { properties: properties }
+      @abstractions[abstraction] = { properties: expand_properties(properties) }
     end
 
     def p(properties, &block)
@@ -22,13 +22,27 @@ class StyleSheet
     private
 
     def add_style(ns, properties, &block)
-      styles = { properties: properties || {} }
+      styles = { properties: properties ? expand_properties(properties) : {} }
 
       if block_given?
         styles[:children] = Context.new(&block)
       end
 
       self[ns] = styles
+    end
+
+    def expand_properties(properties)
+      properties.reduce({}) do |properties, (property, value)|
+        if value.is_a?(Hash)
+          sub_properties = value.reduce({}) do |sub_properties, (sub_property, value)|
+            sub_properties.merge("#{property}-#{sub_property}" => value)
+          end
+
+          properties.merge(sub_properties)
+        else
+          properties.merge(property => value)
+        end
+      end
     end
   end
 
