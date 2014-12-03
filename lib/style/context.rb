@@ -1,3 +1,5 @@
+require_relative './rule'
+
 module Style
   class Context < Hash
     attr_reader :abstract_rules
@@ -8,7 +10,7 @@ module Style
     end
 
     def abstract(abstraction, properties)
-      @abstract_rules[abstraction] = { properties: expand_properties(properties) }
+      @abstract_rules[abstraction] = Rule.new(properties)
     end
 
     def p(properties, &block)
@@ -22,27 +24,7 @@ module Style
     private
 
     def add_rule(ns, properties, &block)
-      rule = { properties: properties ? expand_properties(properties) : {} }
-
-      if block_given?
-        rule[:children] = Context.new(&block)
-      end
-
-      self[ns] = rule
-    end
-
-    def expand_properties(properties)
-      properties.reduce({}) do |properties, (property, value)|
-        if value.is_a?(Hash)
-          sub_properties = value.reduce({}) do |sub_properties, (sub_property, value)|
-            sub_properties.merge("#{property}-#{sub_property}" => value)
-          end
-
-          properties.merge(sub_properties)
-        else
-          properties.merge(property => value)
-        end
-      end
+      self[ns] = Rule.new(properties, &block)
     end
   end
 end
