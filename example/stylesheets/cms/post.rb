@@ -13,16 +13,16 @@
 #
 StyleSheet.new(:cms_post) do
   header do
-    title.merge!(extends: { typography: [:title, :large] })
+    title.extend(typography: [:title, :large])
   end
 
-  intro(margin: '2em').merge!(extends: { typography: :important })
+  intro(margin: '2em').extend(typography: :important)
 
   content(margin: '1em 0 0 0') do
     p(margin: '1em 0 0 0')
   end
 
   footer(margin: '2em') do
-    cite.merge!(extends: { typography: :emphasis })
+    cite.extend(typography: :emphasis)
   end
 end

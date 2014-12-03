@@ -20,7 +20,7 @@
 #
 StyleSheet.new(:standard_form) do
   field.include(:cf) do
-    label(display: :block).merge!(extends: { type: [:standard, :heavy] })
+    label(display: :block).extend(type: [:standard, :heavy])
     input(appearance: :none, border: '1px solid grey')
   end
 

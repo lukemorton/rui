@@ -39,7 +39,7 @@
 
 StyleSheet.new(:type) do
   abstract(:standard, font: '400 12px Georgia')
-  abstract(:title, font: { family: :Arial }).merge!(extends: { type: :standard })
+  abstract(:title, font: { family: :Arial }).extend(type: :standard)
 
   abstract(:heavy, font: { weight: 400 })
   abstract(:emphasis, font: { style: :italic })

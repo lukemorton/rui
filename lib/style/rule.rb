@@ -4,7 +4,12 @@ module Style
   class Rule < Hash
     def initialize(properties, &block)
       self[:properties] = expand_properties(properties || {})
+      self[:extends] = {}
       self[:children] = Context.new(&block)
+    end
+
+    def extend(extensions)
+      self[:extends] = extensions
     end
 
     private

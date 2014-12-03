@@ -42,15 +42,15 @@ describe Style::Compiler do
       let(:type_style_sheet) do
         Style::Sheet.new(:type) do
           abstract(:standard, font: '400 16px Arial')
-          abstract(:title, font: { family: 'Georgia' }).merge!(extends: { type: :standard })
+          abstract(:title, font: { family: 'Georgia' }).extend(type: :standard)
           abstract(:large, font: { size: '3em' })
         end
       end
 
       let(:page_style_sheet) do
         Style::Sheet.new(:page) do
-          title.merge!(extends: { type: [:title, :large] })
-          content.merge!(extends: { type: :standard })
+          title.extend(type: [:title, :large])
+          content.extend(type: :standard)
         end
       end
 
