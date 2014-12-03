@@ -1,5 +1,9 @@
 # rui
 
+[![Code Climate](https://codeclimate.com/github/DrPheltRight/rui/badges/gpa.svg)](https://codeclimate.com/github/DrPheltRight/rui)
+[![Build Status](https://travis-ci.org/DrPheltRight/rui.svg?branch=master)](https://travis-ci.org/DrPheltRight/rui)
+[![Test Coverage](https://codeclimate.com/github/DrPheltRight/rui/badges/coverage.svg)](https://codeclimate.com/github/DrPheltRight/rui)
+
 Someone told me it's okay to build UI/UX in your favourite language. I took that
 to mean reinventing the wheel so that's what we'll do.
 
