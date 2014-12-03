@@ -1,12 +1,12 @@
-require_relative '../lib/style_sheet'
+require_relative '../lib/style/sheet'
 
-describe StyleSheet do
+describe Style::Sheet do
   context 'when compiled to bytecode' do
     subject { stylesheet.to_bytecode }
 
     context 'single definition' do
       let(:stylesheet) do
-        StyleSheet.new(:cms_post) do
+        Style::Sheet.new(:cms_post) do
           title(font: '400 16px Arial')
         end
       end
@@ -16,7 +16,7 @@ describe StyleSheet do
 
     context 'nested definition' do
       let(:stylesheet) do
-        StyleSheet.new(:cms_post) do
+        Style::Sheet.new(:cms_post) do
           header do
             title(font: '400 16px Arial')
           end
@@ -50,7 +50,7 @@ describe StyleSheet do
     subject { stylesheet.abstract_rules }
 
     let(:stylesheet) do
-      StyleSheet.new(:type) do
+      Style::Sheet.new(:type) do
         abstract(:standard, font: '400 16px Arial')
       end
     end

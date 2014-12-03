@@ -1,15 +1,15 @@
-require_relative '../lib/style_sheet'
-require_relative '../lib/style_sheet_compiler'
+require_relative '../lib/style/sheet'
+require_relative '../lib/style/compiler'
 
-describe StyleSheetCompiler do
-  let(:compiler) { StyleSheetCompiler.new }
+describe Style::Compiler do
+  let(:compiler) { Style::Compiler.new }
 
   subject { compiler.compile }
 
   context 'when compiling to CSS' do
     context 'single style sheet' do
       let(:stylesheet) do
-        StyleSheet.new(:cms_post) do
+        Style::Sheet.new(:cms_post) do
           header do
             title(font: '400 16px Arial')
           end
@@ -40,7 +40,7 @@ describe StyleSheetCompiler do
 
     context 'single style sheet with abstractions' do
       let(:type_style_sheet) do
-        StyleSheet.new(:type) do
+        Style::Sheet.new(:type) do
           abstract(:standard, font: '400 16px Arial')
           abstract(:title, font: { family: 'Georgia' }).merge!(extends: { type: :standard })
           abstract(:large, font: { size: '3em' })
@@ -48,7 +48,7 @@ describe StyleSheetCompiler do
       end
 
       let(:page_style_sheet) do
-        StyleSheet.new(:page) do
+        Style::Sheet.new(:page) do
           title.merge!(extends: { type: [:title, :large] })
           content.merge!(extends: { type: :standard })
         end
