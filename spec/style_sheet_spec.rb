@@ -49,7 +49,7 @@ describe Style::Sheet do
     subject { stylesheet.abstract_rules.to_h }
 
     let(:stylesheet) do
-      Style::Sheet.new(:type) do
+      Style::Sheet.new(:typography) do
         abstract(:standard, font: '400 16px Arial')
       end
     end

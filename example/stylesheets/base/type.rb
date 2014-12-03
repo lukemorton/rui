@@ -37,9 +37,9 @@
 #   }
 # }
 
-StyleSheet.new(:type) do
+StyleSheet.new(:typography) do
   abstract(:standard, font: '400 12px Georgia')
-  abstract(:title, font: { family: :Arial }).extend(type: :standard)
+  abstract(:title, font: { family: :Arial }).extend(typography: :standard)
 
   abstract(:heavy, font: { weight: 400 })
   abstract(:emphasis, font: { style: :italic })

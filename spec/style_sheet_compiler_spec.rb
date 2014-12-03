@@ -39,23 +39,23 @@ describe Style::Compiler do
     end
 
     context 'single style sheet with abstractions' do
-      let(:type_style_sheet) do
-        Style::Sheet.new(:type) do
+      let(:typography_style_sheet) do
+        Style::Sheet.new(:typography) do
           abstract(:standard, font: '400 16px Arial')
-          abstract(:title, font: { family: 'Georgia' }).extend(type: :standard)
+          abstract(:title, font: { family: 'Georgia' }).extend(typography: :standard)
           abstract(:large, font: { size: '3em' })
         end
       end
 
       let(:page_style_sheet) do
         Style::Sheet.new(:page) do
-          title.extend(type: [:title, :large])
-          content.extend(type: :standard)
+          title.extend(typography: [:title, :large])
+          content.extend(typography: :standard)
         end
       end
 
       before(:each) do
-        compiler << type_style_sheet
+        compiler << typography_style_sheet
         compiler << page_style_sheet
       end
 
