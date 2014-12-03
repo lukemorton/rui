@@ -1,5 +1,5 @@
 module Style
-  class AbstractRulesResolver
+  class RulesResolver
     def initialize
       @unresolved_rules = {}
     end
