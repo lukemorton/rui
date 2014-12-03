@@ -13,7 +13,7 @@ module Style
     end
 
     def compile
-      @abstractions = abstract_rules_resolver.resolve!
+      abstract_rules_resolver.resolve!
       sheets.map { |sheet| compile_sheet(sheet) }.join("\n\n")
     end
 
