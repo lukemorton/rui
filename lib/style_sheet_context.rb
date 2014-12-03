@@ -1,33 +1,33 @@
 class StyleSheetContext < Hash
-  attr_reader :abstractions
+  attr_reader :abstract_rules
 
   def initialize(&block)
-    @abstractions = {}
+    @abstract_rules = {}
     instance_eval(&block) if block_given?
   end
 
   def abstract(abstraction, properties)
-    @abstractions[abstraction] = { properties: expand_properties(properties) }
+    @abstract_rules[abstraction] = { properties: expand_properties(properties) }
   end
 
   def p(properties, &block)
-    add_style(:p, properties, &block)
+    add_rule(:p, properties, &block)
   end
 
   def method_missing(method, *args, &block)
-    add_style(method, args.first, &block)
+    add_rule(method, args.first, &block)
   end
 
   private
 
-  def add_style(ns, properties, &block)
-    styles = { properties: properties ? expand_properties(properties) : {} }
+  def add_rule(ns, properties, &block)
+    rule = { properties: properties ? expand_properties(properties) : {} }
 
     if block_given?
-      styles[:children] = StyleSheetContext.new(&block)
+      rule[:children] = StyleSheetContext.new(&block)
     end
 
-    self[ns] = styles
+    self[ns] = rule
   end
 
   def expand_properties(properties)

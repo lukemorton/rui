@@ -46,8 +46,8 @@ describe StyleSheet do
     end
   end
 
-  context 'abstract definition' do
-    subject { stylesheet.abstractions }
+  context 'abstract rules' do
+    subject { stylesheet.abstract_rules }
 
     let(:stylesheet) do
       StyleSheet.new(:type) do

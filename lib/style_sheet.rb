@@ -12,7 +12,7 @@ class StyleSheet
     @context
   end
 
-  def abstractions
-    @context.abstractions
+  def abstract_rules
+    @context.abstract_rules
   end
 end
