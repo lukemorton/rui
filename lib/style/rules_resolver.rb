@@ -8,7 +8,7 @@ module Style
       @unresolved_rules.merge!(abstractions)
     end
 
-    def resolve!
+    def resolve
       @resolved_rules = begin
         @unresolved_rules.reduce({}) do |resolved_stylesheets, (style_sheet, rules)|
           resolved_stylesheets.merge(style_sheet => resolved_rules(rules))

@@ -50,6 +50,7 @@ describe Style::Compiler do
       let(:page_style_sheet) do
         Style::Sheet.new(:page) do
           title.extend(typography: [:title, :large])
+          sub_title.extend(typography: :title)
           content.extend(typography: :standard)
         end
       end
@@ -59,7 +60,8 @@ describe Style::Compiler do
         compiler << page_style_sheet
       end
 
-      it { is_expected.to include(".page__title {\nfont: 400 16px Arial;\nfont-family: Georgia;\nfont-size: 3em;\n}") }
+      it { is_expected.to include(".page__title, .page__sub_title {\nfont: 400 16px Arial;\nfont-family: Georgia;\n}") }
+      it { is_expected.to include(".page__title {\nfont-size: 3em;\n}") }
       it { is_expected.to include(".page__content {\nfont: 400 16px Arial;\n}") }
     end
   end
