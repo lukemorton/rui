@@ -50,7 +50,9 @@ describe Style::Compiler do
       let(:page_style_sheet) do
         Style::Sheet.new(:page) do
           title.extend(typography: [:title, :large])
+
           sub_title.extend(typography: :title)
+
           content.extend(typography: :standard) do
             p(margin: { top: '1.5em' })
           end
