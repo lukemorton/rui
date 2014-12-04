@@ -8,8 +8,9 @@ module Style
       self[:children] = Context.new(&block)
     end
 
-    def extend(extensions)
+    def extend(extensions, &block)
       self[:extends] = extensions
+      self[:children] = Context.new(&block) if block_given?
     end
 
     private

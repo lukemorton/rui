@@ -51,7 +51,9 @@ describe Style::Compiler do
         Style::Sheet.new(:page) do
           title.extend(typography: [:title, :large])
           sub_title.extend(typography: :title)
-          content.extend(typography: :standard)
+          content.extend(typography: :standard) do
+            p(margin: { top: '1.5em' })
+          end
         end
       end
 
@@ -63,6 +65,7 @@ describe Style::Compiler do
       it { is_expected.to include(".page__title, .page__sub_title {\nfont: 400 16px Arial;\nfont-family: Georgia;\n}") }
       it { is_expected.to include(".page__title {\nfont-size: 3em;\n}") }
       it { is_expected.to include(".page__content {\nfont: 400 16px Arial;\n}") }
+      it { is_expected.to include(".page__content__p {\nmargin-top: 1.5em;\n}") }
     end
   end
 end
