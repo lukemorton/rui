@@ -5,16 +5,19 @@
 [![Test Coverage](https://codeclimate.com/github/DrPheltRight/rui/badges/coverage.svg)](https://codeclimate.com/github/DrPheltRight/rui)
 
 A ruby user interface library for building your web app using a component based
-approach. rui provides a DSL atop of HTML and CSS. Yes that means you'll be
-writing your HTML and CSS in pure ruby.
+approach. rui provides a DSL atop of HTML and CSS.
+
+Yes that means you'll be writing your HTML and CSS in pure ruby.
 
 ## Concept
 
 Frontend development has been trending towards component based architecture
-for quite a while. Think SMACSS, BEM, OOCSS, ACSS. Think semantic web.
+for quite a while. Think [SMACSS][SMACSS], [BEM][BEM], [OOCSS][OOCSS],
+[ACSS][ACSS]. Think [semantic web][semantic-web].
 
 The tooling for frontend development has come along way too. We now have
-abstractions on top of CSS such as SCSS and LESS, amongst many others.
+abstractions on top of CSS such as [SCSS][SCSS] and [LESS][LESS], amongst many
+others.
 
 Both of these advancements in frontend development aim to abstract the developer
 a level above what HTML and CSS provide. However they still keep the developers
@@ -64,27 +67,43 @@ aims for rui.
  - Component templating DSL
  - Rails templating railtie for component DSL
 
+The longer plan term will involve layers of abstraction above a ruby DSL atop of
+HTML and CSS. Plans also involve implementing some optimisations for deployment.
+
 ## Examples
 
 The most up to date examples will be the specs. The style sheet compiler spec
 gives you an end-to-end look at what ruby style sheets look like and what
 they compile into.
 
-You can also find my random ideas in the `example/` directory of this
-repository. This is where I first document my ideas before implementing them
-TDD style.
+You can also find my random ideas in the [`example/`][example-dir] directory of
+this repository. This is where I first document my ideas before implementing
+them [TDD style][TDD].
 
 ## Contributing
 
 rui is a crazy experiment. If you have the time to help out I would very much
 appreciate anything you can do. Whether it's giving feedback or submitting
-pull requests, all help is welcome. Just create an issue and start a
-conversation.
+pull requests, all help is welcome.
+
+Just [create an issue][create-issue] and start a conversation.
 
 ## Author
 
-Luke Morton
+Luke Morton. Find me on [twitter][lukes-twitter].
 
 ## License
 
 This idea is MIT.
+
+[SMACSS]: https://smacss.com
+[BEM]: https://bem.info/
+[OOCSS]: http://oocss.org/
+[ACSS]: http://patternlab.io/
+[semantic-web]: http://semanticweb.org/wiki/Main_Page
+[SCSS]: http://sass-lang.com/
+[LESS]: http://lesscss.org/
+[example-dir]: https://github.com/DrPheltRight/rui/tree/master/example
+[TDD]: http://martinfowler.com/bliki/TestDrivenDevelopment.html
+[create-issue]: https://github.com/DrPheltRight/rui/issues/new
+[lukes-twitter]: https://twitter.com/lukemorton
