@@ -20,12 +20,8 @@ module Style
 
     def resolved_rules(rules)
       rules.reduce({}) do |resolved_rules, (rule_name, rule)|
-        if rule[:extends]
-          props = properties_from_unresolved_rules(rule[:extends]).merge(rule[:properties])
-          resolved_rules.merge(rule_name => { properties: props })
-        else
-          resolved_rules.merge(rule_name => rule)
-        end
+        props = properties_from_unresolved_rules(rule[:extends]).merge(rule[:properties])
+        resolved_rules.merge(rule_name => { properties: props })
       end
     end
 
