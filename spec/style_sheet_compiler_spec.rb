@@ -53,7 +53,8 @@ describe Style::Compiler do
 
           sub_title.extend(typography: :title)
 
-          content.extend(typography: :standard) do
+          content do |content|
+            content.extend(typography: :standard)
             p(margin: { top: '1.5em' })
           end
         end

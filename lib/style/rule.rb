@@ -2,15 +2,20 @@ require_relative './context'
 
 module Style
   class Rule < Hash
+    PSEUDO_SELECTORS = [:hover, :active, :visited]
+
     def initialize(properties, &block)
-      self[:properties] = expand_properties(properties || {})
-      self[:extends] = {}
-      self[:children] = Context.new(&block)
+      merge!(properties: expand_properties(properties || {}),
+             extends: {},
+             children: Context.new)
+
+      eval_in_child_context(&block)
     end
 
     def extend(extensions, &block)
       self[:extends] = extensions
-      self[:children] = Context.new(&block) if block_given?
+      eval_in_child_context(&block)
+      self
     end
 
     private
@@ -26,6 +31,12 @@ module Style
         else
           properties.merge(property => value)
         end
+      end
+    end
+
+    def eval_in_child_context(&block)
+      if block_given?
+        self[:children].instance_exec(self, &block)
       end
     end
   end
