@@ -16,18 +16,12 @@ module Style
       end
     end
 
-    def properties(extensions, from = :resolved_rules)
-      (extensions || {}).reduce({}) do |properties, (style_sheet, rule_names)|
-        properties.merge(send("properties_from_#{from}", style_sheet, rule_names))
-      end
-    end
-
     private
 
     def resolved_rules(rules)
       rules.reduce({}) do |resolved_rules, (rule_name, rule)|
         if rule[:extends]
-          props = properties(rule[:extends], :unresolved_rules).merge(rule[:properties])
+          props = properties_from_unresolved_rules(rule[:extends]).merge(rule[:properties])
           resolved_rules.merge(rule_name => { properties: props })
         else
           resolved_rules.merge(rule_name => rule)
@@ -35,12 +29,10 @@ module Style
       end
     end
 
-    def properties_from_unresolved_rules(style_sheet, rule_names)
-      properties_from(@unresolved_rules, style_sheet, rule_names)
-    end
-
-    def properties_from_resolved_rules(style_sheet, rule_names)
-      properties_from(@resolved_rules, style_sheet, rule_names)
+    def properties_from_unresolved_rules(extensions)
+      (extensions || {}).reduce({}) do |properties, (style_sheet, rule_names)|
+        properties.merge(properties_from(@unresolved_rules, style_sheet, rule_names))
+      end
     end
 
     def properties_from(rules, style_sheet, rule_names)
