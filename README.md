@@ -44,7 +44,7 @@ with something like rui:
 
   - No longer worry about naming conventions for classes. Using rui will allow
     you to describe things, not HTML elements and class references to them.
-    Your components will be mapped to HTML and CSS, you styles will only ever
+    Your components will be mapped to HTML and CSS; your styles will only ever
     apply to the components you assign them to.
   - Compile only the styles used in your components. Dead weight will
     automatically be detected and removed. Same goes for redundant classes,
