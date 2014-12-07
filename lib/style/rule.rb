@@ -19,9 +19,8 @@ module Style
       self
     end
 
-    def extend(extensions, &block)
-      self[:extends] = extensions
-      context(&block)
+    def extend(extensions)
+      merge!(extends: extensions)
     end
 
     def when(selector, properties = {}, &block)
