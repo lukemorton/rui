@@ -29,7 +29,7 @@ module Style
 
           properties.merge(sub_properties)
         else
-          properties.merge(property => value)
+          properties.merge(property.to_s.gsub('_', '-').to_sym => value)
         end
       end
     end

@@ -14,9 +14,9 @@ describe Style::Compiler do
             title(font: '400 16px Arial')
           end
 
-          intro(margin: '2em 0 0 0')
+          intro(margin_top: '2em')
 
-          content(margin: '1em 0 0 0') do
+          content(margin: { top: '1em' }) do
             p(margin: '1em 0 0 0')
           end
 
@@ -31,8 +31,8 @@ describe Style::Compiler do
       end
 
       it { is_expected.to include(".cms_post__header__title {\nfont: 400 16px Arial;\n}") }
-      it { is_expected.to include(".cms_post__intro {\nmargin: 2em 0 0 0;\n}") }
-      it { is_expected.to include(".cms_post__content {\nmargin: 1em 0 0 0;\n}") }
+      it { is_expected.to include(".cms_post__intro {\nmargin-top: 2em;\n}") }
+      it { is_expected.to include(".cms_post__content {\nmargin-top: 1em;\n}") }
       it { is_expected.to include(".cms_post__content__p {\nmargin: 1em 0 0 0;\n}") }
       it { is_expected.to include(".cms_post__footer {\nmargin: 2em 0 0 0;\n}") }
       it { is_expected.to include(".cms_post__footer__cite {\nbackground: grey;\nfont-style: italic;\n}") }
@@ -42,7 +42,7 @@ describe Style::Compiler do
       let(:typography_style_sheet) do
         Style::Sheet.new(:typography) do
           abstract(:standard, font: '400 16px Arial')
-          abstract(:title, font: { family: 'Georgia' }).extend(typography: :standard)
+          abstract(:title, font_family: 'Georgia').extend(typography: :standard)
           abstract(:large, font: { size: '3em' })
         end
       end
