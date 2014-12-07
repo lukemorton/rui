@@ -20,8 +20,8 @@ describe Style::Compiler do
             p(margin: '1em 0 0 0')
 
             a(color: :black) do |a|
-              a[:hover] = { color: :red }
-              a[:visited] = { color: :grey }
+              a.when(:hover, color: :red)
+              a.when(:visited, color: :grey)
             end
           end
 
@@ -66,8 +66,8 @@ describe Style::Compiler do
             p(margin: { top: '1.5em' })
 
             a(color: :black) do |a|
-              a[:hover] = { color: :red }
-              a[:visited] = { color: :grey }
+              a.when(:hover, color: :red)
+              a.when(:visited, color: :grey)
             end
           end
         end

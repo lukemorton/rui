@@ -2,8 +2,6 @@ require_relative './context'
 
 module Style
   class Rule < Hash
-    PSEUDO_SELECTORS = [:hover, :active, :visited]
-
     def initialize(properties, &block)
       merge!(properties: expand_properties(properties || {}),
              extends: {},
@@ -26,20 +24,9 @@ module Style
       context(&block)
     end
 
-    def [](key)
-      if PSEUDO_SELECTORS.include?(key)
-        self[:pseudo][key] || set_pseudo_selector(key)
-      else
-        super
-      end
-    end
-
-    def []=(key, value)
-      if PSEUDO_SELECTORS.include?(key)
-        set_pseudo_selector(key, value)
-      else
-        super
-      end
+    def when(selector, properties = {}, &block)
+      self[:pseudo][selector.to_s.gsub('_', '-').to_sym] = Rule.new(properties, &block)
+      self
     end
 
     private
@@ -56,10 +43,6 @@ module Style
           properties.merge(property.to_s.gsub('_', '-').to_sym => value)
         end
       end
-    end
-
-    def set_pseudo_selector(selector, properties = {})
-      self[:pseudo][selector.to_s.gsub('_', '-').to_sym] = Rule.new(properties)
     end
   end
 end

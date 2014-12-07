@@ -30,8 +30,7 @@ describe Style::Sheet do
           a do |a|
             help(display: :none)
 
-            a[:hover].context do |hover|
-              hover[:properties] = { color: :green }
+            a.when(:hover, color: :green) do
               help(display: :block)
             end
           end
