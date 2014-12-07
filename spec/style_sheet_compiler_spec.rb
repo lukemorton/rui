@@ -18,6 +18,11 @@ describe Style::Compiler do
 
           content(margin: { top: '1em' }) do
             p(margin: '1em 0 0 0')
+
+            a(color: :black) do |a|
+              a[:hover] = { color: :red }
+              a[:visited] = { color: :grey }
+            end
           end
 
           footer(margin: '2em 0 0 0') do
@@ -34,6 +39,9 @@ describe Style::Compiler do
       it { is_expected.to include(".cms_post__intro {\nmargin-top: 2em;\n}") }
       it { is_expected.to include(".cms_post__content {\nmargin-top: 1em;\n}") }
       it { is_expected.to include(".cms_post__content__p {\nmargin: 1em 0 0 0;\n}") }
+      it { is_expected.to include(".cms_post__content__a {\ncolor: black;\n}") }
+      it { is_expected.to include(".cms_post__content__a:hover {\ncolor: red;\n}") }
+      it { is_expected.to include(".cms_post__content__a:visited {\ncolor: grey;\n}") }
       it { is_expected.to include(".cms_post__footer {\nmargin: 2em 0 0 0;\n}") }
       it { is_expected.to include(".cms_post__footer__cite {\nbackground: grey;\nfont-style: italic;\n}") }
     end
@@ -56,6 +64,11 @@ describe Style::Compiler do
           content do |content|
             content.extend(typography: :standard)
             p(margin: { top: '1.5em' })
+
+            a(color: :black) do |a|
+              a[:hover] = { color: :red }
+              a[:visited] = { color: :grey }
+            end
           end
         end
       end
@@ -69,6 +82,9 @@ describe Style::Compiler do
       it { is_expected.to include(".page__title {\nfont-size: 3em;\n}") }
       it { is_expected.to include(".page__content {\nfont: 400 16px Arial;\n}") }
       it { is_expected.to include(".page__content__p {\nmargin-top: 1.5em;\n}") }
+      it { is_expected.to include(".page__content__a {\ncolor: black;\n}") }
+      it { is_expected.to include(".page__content__a:hover {\ncolor: red;\n}") }
+      it { is_expected.to include(".page__content__a:visited {\ncolor: grey;\n}") }
     end
   end
 end

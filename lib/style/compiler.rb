@@ -51,6 +51,7 @@ module Style
         rule_css << "#{rule_selector} {\n#{css_props}\n}"
       end
 
+      rule_css.concat(define_rules(rule_selector, rule[:pseudo], ':'))
       rule_css.concat(define_rules(rule_selector, rule[:children], '__'))
 
       rule_css.join("\n")

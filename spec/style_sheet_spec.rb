@@ -27,6 +27,15 @@ describe Style::Sheet do
             p(margin: '1em 0 0 0')
           end
 
+          a do |a|
+            help(display: :none)
+
+            a[:hover].context do |hover|
+              hover[:properties] = { color: :green }
+              help(display: :block)
+            end
+          end
+
           footer(margin: '2em 0 0 0') do
             cite(font: { style: :italic })
           end
@@ -39,6 +48,7 @@ describe Style::Sheet do
 
       it { is_expected.to include_rule_with_properties(:content, margin: '1em 0 0 0') }
       it { is_expected.to include_child_rule_with_properties(:content, :p, margin: '1em 0 0 0') }
+      it { is_expected.to include_pseudo_rule_with_properties(:a, :hover, color: :green) }
 
       it { is_expected.to include_rule_with_properties(:footer, margin: '2em 0 0 0') }
       it { is_expected.to include_child_rule_with_properties(:footer, :cite, 'font-style' => :italic) }
@@ -59,6 +69,12 @@ describe Style::Sheet do
 
   def include_rule_with_properties(selector, property_expectations)
     rule_expectations = { properties: a_hash_including(property_expectations) }
+    match(a_hash_including(selector => a_hash_including(rule_expectations)))
+  end
+
+  def include_pseudo_rule_with_properties(selector, pseudo_selector, property_expectations)
+    property_expectations = a_hash_including(properties: property_expectations)
+    rule_expectations = { pseudo: { pseudo_selector => property_expectations } }
     match(a_hash_including(selector => a_hash_including(rule_expectations)))
   end
 
