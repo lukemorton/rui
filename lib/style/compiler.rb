@@ -51,13 +51,15 @@ module Style
         rule_css << "#{rule_selector} {\n#{css_props}\n}"
       end
 
-      unless rule[:children].nil?
-        rule[:children].each do |child_selector, child_styles|
-          rule_css << define_rule("#{rule_selector}__#{child_selector}", child_styles)
-        end
-      end
+      rule_css.concat(define_rules(rule_selector, rule[:children], '__'))
 
       rule_css.join("\n")
+    end
+
+    def define_rules(parent_selector, rules, separator)
+      rules.map do |selector, rule|
+        define_rule("#{parent_selector}#{separator}#{selector}", rule)
+      end
     end
 
     def define_properties(properties)
