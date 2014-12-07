@@ -20,7 +20,9 @@
 #   </footer>
 # </article>
 #
-Component.new(:cms_post, html: :article) do
+Component.new(:cms_post) do |component, post|
+  component.element = :article
+
   header do
     h1 { post.title }
   end

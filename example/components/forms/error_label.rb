@@ -5,7 +5,7 @@
 #   </label>
 # </div>
 #
-Component.new(:error_label) do
+Component.new(:error_label) do |component, errors|
   if errors.count > 0
     label(for: for) { errors.join(' ') }
   end

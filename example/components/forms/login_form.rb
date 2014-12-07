@@ -1,10 +1,14 @@
-# <form method="post" class="standard_form" id="login_form">
+# <form method="post"
+#       action="<%= action %>"
+#       class="standard_form"
+#       id="login_form">
 #   <div class="standard_form__field">
 #     <label for="email">Email</label>
 #     <input type="email"
 #            name="email"
 #            id="email"
 #            class="standard_form__field__input"
+#            value="<%= user.email %>"
 #            placeholder="example@example.com" />
 #     <div class="standard_form__field__error_label">
 #       <label for="<%= for %>"
@@ -37,29 +41,33 @@
 #   </div>
 # </form>
 #
-Component.new(:login_form, html: { form: { method: :post } },
-                           stylesheet: :standard_form,
-                           uses: [:error_label]) do
+Component.new(:login_form) do |component, action, user|
+  component.element = { form: { method: :post, action: action } }
+  component.stylesheet = :standard_form
+  component.use(:error_label)
+
   field do
     label(for: :email) { 'Email' }
+
     input(type: :email,
           name: :email,
           id: :email,
           value: user.email,
           placeholder: 'example@example.com')
-    error_label(errors: user.errors.email,
-                for: :password)
+
+    error_label(for: :password, errors: user.errors.email)
   end
 
   field do
     label(for: :password) { 'Password' }
+
     input(type: :password,
           name: :password,
           id: :password,
           value: user.password,
           placeholder: 'xxxxxxxx')
-    error_label(errors: user.errors.password
-                for: :password)
+
+    error_label(for: :password, errors: user.errors.password)
   end
 
   buttons do
