@@ -13,9 +13,9 @@ is a templating language and a CSS replacement. It enforces component based
 design in your ruby applications.
 
 rui comes with rails asset pipeline integration. In fact it's the fastest
-CSS preprocessor on rails. It's not only fast in development given rui can
-coordinate your HTML and CSS so much so that it not only minifies CSS but also
-your HTML, including class names.
+CSS preprocessor on rails. Not only fast in development, rui can coordinate your
+HTML and CSS so much so that it not only minifies CSS but also your HTML,
+including class names.
 
 ``` ruby
 Style::Sheet.new(:cms_post) do |s|
