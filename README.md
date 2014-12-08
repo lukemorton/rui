@@ -16,7 +16,7 @@ CSS preprocessor on rails. It's not only fast in development given rui can
 coordinate your HTML and CSS so much so that it not only minifies CSS but also
 your HTML, including class names.
 
-![Example of rui](https://github.com/DrPheltRight/rui/edit/master/example/rui.jpg)
+![Example of rui](https://raw.githubusercontent.com/DrPheltRight/rui/master/example/rui.jpg)
 
 ## Concept
 
