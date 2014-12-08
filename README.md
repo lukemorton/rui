@@ -19,7 +19,7 @@ including class names.
 
 ## The Style Sheet
 
-With both the beauty and power of ruby large scale frontend becomes easier
+With both the beauty and power of ruby, large scale frontend becomes easier
 to manage. Sass and Less are scrambling to implement programming language
 features that ruby has always had.
 
