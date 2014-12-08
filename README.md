@@ -5,9 +5,10 @@
 [![Test Coverage](https://codeclimate.com/github/DrPheltRight/rui/badges/coverage.svg)](https://codeclimate.com/github/DrPheltRight/rui)
 
 A ruby user interface library for building your web app using a component based
-approach. The first of it's kind rui provides a DSL atop of HTML and CSS.
+approach. The first of it's kind rui provides a new way of architecting
+HTML and CSS.
 
-Providing frontend development the abstractions they've been waiting for rui
+Providing frontend development the abstractions they've been waiting for, rui
 is a templating language and a CSS replacement. It enforces component based
 design in your ruby applications.
 
