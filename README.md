@@ -18,7 +18,7 @@ HTML and CSS so much so that it not only minifies CSS but also your HTML,
 including class names.
 
 ``` ruby
-Style::Sheet.new(:cms_post) do |s|
+Style::Sheet.new(:blog_post) do |s|
   article do
     header do
       title.extend(typography: [:title, :large])
@@ -36,6 +36,22 @@ Style::Sheet.new(:cms_post) do |s|
 
   s.media(min_width: '50em') do
     article(max_width: '50em')
+  end
+end
+```
+
+``` ruby
+Component.new(:blog_post) do |component, post|
+  component.element = :article
+
+  header do
+    title(:h1) { post.title }
+  end
+
+  content(:section) { post.content }
+
+  footer do
+    p { ['By', cite { post.author.name }] }
   end
 end
 ```
