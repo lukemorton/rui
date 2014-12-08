@@ -5,9 +5,18 @@
 [![Test Coverage](https://codeclimate.com/github/DrPheltRight/rui/badges/coverage.svg)](https://codeclimate.com/github/DrPheltRight/rui)
 
 A ruby user interface library for building your web app using a component based
-approach. rui provides a DSL atop of HTML and CSS.
+approach. The first of it's kind rui provides a DSL atop of HTML and CSS.
 
-Yes that means you'll be writing your HTML and CSS in pure ruby.
+Providing frontend development the abstractions they've been waiting for rui
+is a templating language and a CSS replacement. It enforces component based
+design in your ruby applications.
+
+rui comes with rails asset pipeline integration. In fact it's the fastest
+CSS preprocessor on rails. It's not only fast in development given rui can
+coordinate your HTML and CSS so much so that it not only minifies CSS but also
+your HTML, including class names.
+
+![Example of rui](https://github.com/DrPheltRight/rui/edit/master/example/rui.jpg)
 
 ## Concept
 
@@ -16,7 +25,7 @@ for quite a while. Think [SMACSS][SMACSS], [BEM][BEM], [OOCSS][OOCSS],
 [ACSS][ACSS]. Think [semantic web][semantic-web].
 
 The tooling for frontend development has come along way too. We now have
-abstractions on top of CSS such as [SCSS][SCSS] and [LESS][LESS], amongst many
+abstractions on top of CSS such as [Sass][Sass] and [Less][Less], amongst many
 others.
 
 Both of these advancements in frontend development aim to abstract the developer
@@ -101,8 +110,8 @@ This idea is MIT.
 [OOCSS]: http://oocss.org/
 [ACSS]: http://patternlab.io/
 [semantic-web]: http://semanticweb.org/wiki/Main_Page
-[SCSS]: http://sass-lang.com/
-[LESS]: http://lesscss.org/
+[Sass]: http://sass-lang.com/
+[Less]: http://lesscss.org/
 [example-dir]: https://github.com/DrPheltRight/rui/tree/master/example
 [TDD]: http://martinfowler.com/bliki/TestDrivenDevelopment.html
 [create-issue]: https://github.com/DrPheltRight/rui/issues/new
