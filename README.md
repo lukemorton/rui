@@ -17,6 +17,12 @@ CSS preprocessor on rails. Not only fast in development, rui can coordinate your
 HTML and CSS so much so that it not only minifies CSS but also your HTML,
 including class names.
 
+## The Style Sheet
+
+With both the beauty and power of ruby large scale frontend becomes easier
+to manage. Sass and Less are scrambling to implement programming language
+features that ruby has always had.
+
 ``` ruby
 Style::Sheet.new(:blog_post) do |s|
   article do
@@ -40,6 +46,11 @@ Style::Sheet.new(:blog_post) do |s|
 end
 ```
 
+## The Component
+
+The structure of a HTML component is expressed in a concise manner mirroring
+that of the Style Sheet. Many have commented on the eloquence of rui.
+
 ``` ruby
 Component.new(:blog_post) do |component, post|
   component.element = :article
@@ -56,7 +67,7 @@ Component.new(:blog_post) do |component, post|
 end
 ```
 
-## Concept
+## The Concept
 
 Frontend development has been trending towards component based architecture
 for quite a while. Think [SMACSS][SMACSS], [BEM][BEM], [OOCSS][OOCSS],
@@ -102,7 +113,7 @@ with something like rui:
     That's not just whitespace removal in your CSS but minification of class
     names that link your CSS and HTML together!
 
-## The plan
+## The Plan
 
 rui is a nascent library. So far it provides very basic compilation of ruby
 style sheets into CSS. In bullet point form I will now describe the short term
@@ -117,7 +128,7 @@ aims for rui.
 The longer plan term will involve layers of abstraction above a ruby DSL atop of
 HTML and CSS. Plans also involve implementing some optimisations for deployment.
 
-## Examples
+## More Examples
 
 The most up to date examples will be the specs. The style sheet compiler spec
 gives you an end-to-end look at what ruby style sheets look like and what
