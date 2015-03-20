@@ -28,11 +28,7 @@ describe Style::Sheet do
           end
 
           a do |a|
-            help(display: :none)
-
-            a.when(:hover, color: :green) do
-              help(display: :block)
-            end
+            a.when(:hover, color: :green)
           end
 
           footer(margin: '2em 0 0 0') do

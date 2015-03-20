@@ -63,10 +63,16 @@ describe Style::Compiler do
 
           content do |content|
             content.extend(typography: :standard)
+
             p(margin: { top: '1.5em' })
 
             a(color: :black) do |a|
-              a.when(:hover, color: :red)
+              help(display: :none)
+
+              a.when(:hover, color: :red) do
+                help(display: :block)
+              end
+
               a.when(:visited, color: :grey)
             end
           end
@@ -85,6 +91,8 @@ describe Style::Compiler do
       it { is_expected.to include(".page__content__a {\ncolor: black;\n}") }
       it { is_expected.to include(".page__content__a:hover {\ncolor: red;\n}") }
       it { is_expected.to include(".page__content__a:visited {\ncolor: grey;\n}") }
+      it { is_expected.to include(".page__content__a__help {\ndisplay: none;\n}") }
+      it { is_expected.to include(".page__content__a:hover .page__content__a__help {\ndisplay: block;\n}") }
     end
   end
 end

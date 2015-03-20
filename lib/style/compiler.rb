@@ -29,7 +29,7 @@ module Style
       end
     end
 
-    def define_rule(rule_selector, rule, child_prefix = '')
+    def define_rule(rule_selector, rule, child_prefix = '', pseudo = false)
       properties = rules_merger.merge_extensions(rule)
 
       rule_css = []
@@ -41,6 +41,7 @@ module Style
       end
 
       rule_css.concat(define_pseudo_rules("#{child_prefix}#{rule_selector}", rule[:pseudo]))
+      rule_selector = '' if pseudo
       rule_css.concat(define_child_rules("#{child_prefix}#{rule_selector}", rule[:children]))
 
       rule_css.join("\n")
@@ -49,7 +50,7 @@ module Style
     def define_pseudo_rules(rule_selector, rules)
       rules.map do |selector, rule|
         pseudo_selector = "#{rule_selector}:#{selector}"
-        define_rule(pseudo_selector, rule, "#{pseudo_selector} #{rule_selector}")
+        define_rule(pseudo_selector, rule, "#{pseudo_selector} #{rule_selector}", true)
       end
     end
 
