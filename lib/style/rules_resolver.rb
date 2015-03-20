@@ -32,9 +32,7 @@ module Style
     end
 
     def properties_from(rules, style_sheet, rule_names)
-      unless rule_names.is_a?(Array)
-        rule_names = [rule_names]
-      end
+      rule_names = [rule_names] unless rule_names.is_a?(Array)
 
       rule_names.reduce({}) do |properties, rule_name|
         properties.merge(rules[style_sheet][rule_name][:properties])
