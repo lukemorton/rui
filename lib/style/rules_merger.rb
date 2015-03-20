@@ -27,6 +27,20 @@ module Style
       end
     end
 
+    def merge(properties, extensions)
+      if extensions
+        extensions.reduce(properties) do |properties, (ss_name, rules)|
+          rules = [rules] unless rules.is_a?(Array)
+
+          rules.map { |rule| [ss_name, rule] }.reduce(properties) do |properties, extensions_key|
+            properties.merge(extensions_rules[extensions_key][:properties])
+          end
+        end
+      else
+        properties
+      end
+    end
+
     def merged_rules
       merged_rule_selectors.map do |extensions_key, rules|
         [rules, extensions_rules[extensions_key]]

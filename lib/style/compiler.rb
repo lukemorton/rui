@@ -29,9 +29,9 @@ module Style
     end
 
     def compiled_merged_css
-      rules_merger.merged_rules.map do |(selectors, rule)|
-        define_rule(selectors.join(', '), rule)
-      end.join("\n\n")
+      # rules_merger.merged_rules.map do |(selectors, rule)|
+      #   define_rule(selectors.join(', '), rule)
+      # end.join("\n\n")
     end
 
     def compile_sheet(sheet)
@@ -40,26 +40,33 @@ module Style
       end
     end
 
-    def define_rule(rule_selector, rule)
-      rules_merger.add_rule_extensions(rule_selector, rule[:extends])
+    def define_rule(rule_selector, rule, child_prefix = '')
+      properties = rules_merger.merge(rule[:properties], rule[:extends])
 
       rule_css = []
 
-      css_props = define_properties(rule[:properties])
+      css_props = define_properties(properties)
 
       unless css_props.empty?
         rule_css << "#{rule_selector} {\n#{css_props}\n}"
       end
 
-      rule_css.concat(define_rules(rule_selector, rule[:pseudo], ':'))
-      rule_css.concat(define_rules(rule_selector, rule[:children], '__'))
+      rule_css.concat(define_pseudo_rules("#{child_prefix}#{rule_selector}", rule[:pseudo]))
+      rule_css.concat(define_child_rules("#{child_prefix}#{rule_selector}", rule[:children]))
 
       rule_css.join("\n")
     end
 
-    def define_rules(parent_selector, rules, separator)
+    def define_pseudo_rules(rule_selector, rules)
       rules.map do |selector, rule|
-        define_rule("#{parent_selector}#{separator}#{selector}", rule)
+        pseudo_selector = "#{rule_selector}:#{selector}"
+        define_rule(pseudo_selector, rule, "#{pseudo_selector} #{rule_selector}")
+      end
+    end
+
+    def define_child_rules(rule_selector, rules)
+      rules.map do |selector, rule|
+        define_rule("#{rule_selector}__#{selector}", rule)
       end
     end
 
