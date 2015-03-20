@@ -41,7 +41,7 @@ module Style
     end
 
     def define_rule(rule_selector, rule, child_prefix = '')
-      properties = rules_merger.merge(rule[:properties], rule[:extends])
+      properties = rules_merger.merge_extensions(rule)
 
       rule_css = []
 

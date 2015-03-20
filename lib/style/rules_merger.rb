@@ -27,9 +27,9 @@ module Style
       end
     end
 
-    def merge(properties, extensions)
-      if extensions
-        extensions.reduce(properties) do |properties, (ss_name, rules)|
+    def merge_extensions(rule)
+      if rule[:extends]
+        rule[:extends].reduce(rule[:properties]) do |properties, (ss_name, rules)|
           rules = [rules] unless rules.is_a?(Array)
 
           rules.map { |rule| [ss_name, rule] }.reduce(properties) do |properties, extensions_key|
@@ -37,7 +37,7 @@ module Style
           end
         end
       else
-        properties
+        rule[:properties]
       end
     end
 
