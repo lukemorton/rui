@@ -46,7 +46,7 @@ describe Style::Compiler do
       it { is_expected.to include(".cms_post__footer__cite {\nbackground: grey;\nfont-style: italic;\n}") }
     end
 
-    context 'single style sheet with abstractions' do
+    context 'style sheets with abstractions' do
       let(:typography_style_sheet) do
         Style::Sheet.new(:typography) do
           abstract(:standard, font: '400 16px Arial')
