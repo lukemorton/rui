@@ -16,23 +16,12 @@ module Style
 
     def compile
       rules_merger.rules = rules_resolver.resolve
-      css = compiled_standalone_css
-      "#{compiled_merged_css}\n\n#{css}"
+      sheets.map { |sheet| compile_sheet(sheet) }.join("\n\n")
     end
 
     private
 
     attr_reader :sheets, :rules_resolver, :rules_merger
-
-    def compiled_standalone_css
-      sheets.map { |sheet| compile_sheet(sheet) }.join("\n\n")
-    end
-
-    def compiled_merged_css
-      # rules_merger.merged_rules.map do |(selectors, rule)|
-      #   define_rule(selectors.join(', '), rule)
-      # end.join("\n\n")
-    end
 
     def compile_sheet(sheet)
       sheet.to_bytecode.map do |element, styles|
