@@ -15,16 +15,12 @@ module Style
     end
 
     def merge_extensions(rule)
-      if rule[:extends]
-        rule[:extends].reduce(rule[:properties]) do |properties, (ss_name, rules)|
-          rules = [rules] unless rules.is_a?(Array)
+      rule[:extends].reduce(rule[:properties]) do |properties, (ss_name, rules)|
+        rules = [rules] unless rules.is_a?(Array)
 
-          rules.map { |rule| [ss_name, rule] }.reduce(properties) do |properties, extensions_key|
-            properties.merge(extensions_rules[extensions_key][:properties])
-          end
+        rules.map { |rule| [ss_name, rule] }.reduce(properties) do |properties, extensions_key|
+          properties.merge(extensions_rules[extensions_key][:properties])
         end
-      else
-        rule[:properties]
       end
     end
 

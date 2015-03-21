@@ -26,7 +26,7 @@ module Style
     end
 
     def properties_from_unresolved_rules(extensions)
-      (extensions || {}).reduce({}) do |properties, (style_sheet, rule_names)|
+      extensions.reduce({}) do |properties, (style_sheet, rule_names)|
         properties.merge(properties_from(@unresolved_rules, style_sheet, rule_names))
       end
     end
