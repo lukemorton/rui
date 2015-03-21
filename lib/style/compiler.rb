@@ -24,7 +24,7 @@ module Style
     attr_reader :sheets, :rules_resolver, :rules_merger
 
     def compile_sheet(sheet)
-      sheet.to_bytecode.map do |element, styles|
+      sheet.context.map do |element, styles|
         define_rule(".#{sheet.name}__#{element}", styles)
       end
     end

@@ -2,7 +2,7 @@ require_relative '../lib/style/sheet'
 
 describe Style::Sheet do
   context 'when compiled to bytecode' do
-    subject { stylesheet.to_bytecode.to_h }
+    subject { stylesheet.context.to_h }
 
     context 'single definition' do
       let(:stylesheet) do

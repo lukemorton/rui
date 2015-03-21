@@ -9,7 +9,7 @@ module Style
       @context = Context.new(&block)
     end
 
-    def to_bytecode
+    def context
       @context
     end
 
