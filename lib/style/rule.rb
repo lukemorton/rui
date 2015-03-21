@@ -30,6 +30,18 @@ module Style
     alias_method :when, :pseudo
     alias_method :on, :pseudo
 
+    def focus(properties = {}, &block)
+      pseudo(:focus, properties, &block)
+    end
+
+    def hover(properties = {}, &block)
+      pseudo(:hover, properties, &block)
+    end
+
+    def visited(properties = {}, &block)
+      pseudo(:visited, properties, &block)
+    end
+
     private
 
     def expand_properties(properties)

@@ -30,7 +30,7 @@ describe Style::Compiler do
           a(color: :black) do |a|
             help(display: :none)
 
-            a.when(:hover, color: :red) do
+            a.hover(color: :red) do
               help(display: :block).extend(typography: :small)
             end
 

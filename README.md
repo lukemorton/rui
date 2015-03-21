@@ -34,8 +34,8 @@ Style::Sheet.new(:blog_post) do |s|
       p(margin_top: '1.5em')
 
       a(color: :black) do |a|
-        a.when(:hover, color: :red)
-        a.when(:visited, color: :grey)
+        a.hover(color: :red)
+        a.visited(color: :grey)
       end
     end
   end
