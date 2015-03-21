@@ -14,19 +14,6 @@ module Style
       end
     end
 
-    def add_rule_extensions(rule, extensions)
-      if extensions
-        extensions.each do |ss_name, rules|
-          rules = [rules] unless rules.is_a?(Array)
-
-          rules.map { |rule| [ss_name, rule] }.each do |extension_key|
-            merged_rule_selectors[extension_key] ||= []
-            merged_rule_selectors[extension_key] << rule
-          end
-        end
-      end
-    end
-
     def merge_extensions(rule)
       if rule[:extends]
         rule[:extends].reduce(rule[:properties]) do |properties, (ss_name, rules)|
@@ -38,12 +25,6 @@ module Style
         end
       else
         rule[:properties]
-      end
-    end
-
-    def merged_rules
-      merged_rule_selectors.map do |extensions_key, rules|
-        [rules, extensions_rules[extensions_key]]
       end
     end
 
