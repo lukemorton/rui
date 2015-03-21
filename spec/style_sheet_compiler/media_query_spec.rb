@@ -27,7 +27,8 @@ describe Style::Compiler do
       compiler << media_style_sheet
     end
 
-    it { is_expected.to include("@media (min-width: 50em)") }
-    it { is_expected.to include("@media (min-width: 50em) and (max-width: 100em)") }
+    it { is_expected.to include('@media (min-width: 50em)') }
+    it { is_expected.to include('@media (min-width: 50em) and (max-width: 100em)') }
+    it { is_expected.to include(".article__header__a {\nfloat: none;\n}") }
   end
 end
