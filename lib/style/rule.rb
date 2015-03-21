@@ -23,10 +23,12 @@ module Style
       merge!(extends: extensions)
     end
 
-    def when(selector, properties = {}, &block)
+    def pseudo(selector, properties = {}, &block)
       self[:pseudo][selector.to_s.gsub('_', '-').to_sym] = Rule.new(properties, &block)
       self
     end
+    alias_method :when, :pseudo
+    alias_method :on, :pseudo
 
     private
 
