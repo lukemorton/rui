@@ -11,6 +11,7 @@ describe Style::Compiler do
       Style::Sheet.new(:typography) do
         abstract(:standard, font: '400 16px Arial')
         abstract(:title, font_family: 'Georgia').extend(typography: :standard)
+        abstract(:small, font: { size: '.8em' })
         abstract(:large, font: { size: '3em' })
       end
     end
@@ -30,7 +31,7 @@ describe Style::Compiler do
             help(display: :none)
 
             a.when(:hover, color: :red) do
-              help(display: :block)
+              help(display: :block).extend(typography: :small)
             end
 
             a.when(:visited, color: :grey)
@@ -52,6 +53,6 @@ describe Style::Compiler do
     it { is_expected.to include(".page__content__a:hover {\ncolor: red;\n}") }
     it { is_expected.to include(".page__content__a:visited {\ncolor: grey;\n}") }
     it { is_expected.to include(".page__content__a__help {\ndisplay: none;\n}") }
-    it { is_expected.to include(".page__content__a:hover .page__content__a__help {\ndisplay: block;\n}") }
+    it { is_expected.to include(".page__content__a:hover .page__content__a__help {\ndisplay: block;\nfont-size: .8em;\n}") }
   end
 end
