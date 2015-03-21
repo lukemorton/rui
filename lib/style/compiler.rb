@@ -16,17 +16,38 @@ module Style
 
     def compile
       rules_merger.rules = rules_resolver.resolve
-      sheets.map { |sheet| compile_sheet(sheet) }.join("\n\n")
+      "#{compile_sheets}\n\n#{compile_media_queries}"
     end
 
     private
 
     attr_reader :sheets, :rules_resolver, :rules_merger
 
-    def compile_sheet(sheet)
-      sheet.context.map do |element, styles|
+    def compile_sheets
+      sheets.map { |sheet| compile_sheet_context(sheet, sheet.context) }.join("\n\n")
+    end
+
+    def compile_media_queries
+      sheets.map do |sheet|
+        sheet.media.map do |query, context|
+          compile_media_query(sheet, query, context)
+        end.join("\n\n")
+      end.join("\n\n")
+    end
+
+    def compile_sheet_context(sheet, context)
+      context.map do |element, styles|
         define_rule(".#{sheet.name}__#{element}", styles)
       end
+    end
+
+    def compile_media_query(sheet, query, context)
+      query_conditions = query.map { |p, v| "(#{p}: #{v})" }.join(' and ')
+      css = []
+      css << "@media #{query_conditions} {"
+      css << compile_sheet_context(sheet, context)
+      css << '}'
+      css.join("\n")
     end
 
     def define_rule(rule_selector, rule, child_prefix = '', pseudo = false)

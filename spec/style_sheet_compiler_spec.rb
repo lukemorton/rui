@@ -94,5 +94,30 @@ describe Style::Compiler do
       it { is_expected.to include(".page__content__a__help {\ndisplay: none;\n}") }
       it { is_expected.to include(".page__content__a:hover .page__content__a__help {\ndisplay: block;\n}") }
     end
+
+    context 'when style sheet contains media queries' do
+      let(:media_style_sheet) do
+        Style::Sheet.new(:article) do |s|
+          s.media(min_width: '50em') do
+            article(max_width: '50em')
+          end
+
+          s.media(min_width: '50em', max_width: '100em') do
+            article(max_width: '50em')
+
+            header do
+              a(float: :none)
+            end
+          end
+        end
+      end
+
+      before(:each) do
+        compiler << media_style_sheet
+      end
+
+      it { is_expected.to include("@media (min-width: 50em)") }
+      it { is_expected.to include("@media (min-width: 50em) and (max-width: 100em)") }
+    end
   end
 end
