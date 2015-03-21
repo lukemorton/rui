@@ -62,20 +62,38 @@ describe Style::Sheet do
     it { is_expected.to include_rule_with_properties(:standard, font: '400 16px Arial') }
   end
 
-  def include_rule_with_properties(selector, property_expectations)
-    rule_expectations = { properties: a_hash_including(property_expectations) }
-    match(a_hash_including(selector => a_hash_including(rule_expectations)))
+  matcher :include_rule_with_properties do |selector, expected|
+    match do |actual|
+      rule_expectations = { properties: a_hash_including(expected) }
+      match(a_hash_including(selector => a_hash_including(rule_expectations)))
+    end
+
+    description do
+      "include rule with #{expected}"
+    end
   end
 
-  def include_pseudo_rule_with_properties(selector, pseudo_selector, property_expectations)
-    property_expectations = a_hash_including(properties: property_expectations)
-    rule_expectations = { pseudo: { pseudo_selector => property_expectations } }
-    match(a_hash_including(selector => a_hash_including(rule_expectations)))
+  matcher :include_pseudo_rule_with_properties do |selector, pseudo_selector, expected|
+    match do |actual|
+      property_expectations = a_hash_including(properties: expected)
+      rule_expectations = { pseudo: { pseudo_selector => property_expectations } }
+      match(a_hash_including(selector => a_hash_including(rule_expectations)))
+    end
+
+    description do
+      "include pseudo rule with #{expected}"
+    end
   end
 
-  def include_child_rule_with_properties(selector, child_selector, property_expectations)
-    property_expectations = a_hash_including(properties: a_hash_including(property_expectations))
-    rule_expectations = { children: a_hash_including(child_selector => property_expectations) }
-    match(a_hash_including(selector => a_hash_including(rule_expectations)))
+  matcher :include_child_rule_with_properties do |selector, child_selector, expected|
+    match do |actual|
+      property_expectations = a_hash_including(properties: a_hash_including(expected))
+      rule_expectations = { children: a_hash_including(child_selector => property_expectations) }
+      match(a_hash_including(selector => a_hash_including(rule_expectations)))
+    end
+
+    description do
+      "include child rule with #{expected}"
+    end
   end
 end
