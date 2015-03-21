@@ -6,7 +6,7 @@ module Style
 
     def initialize(&block)
       @abstract_rules = {}
-      instance_eval(&block) if block_given?
+      instance_exec(&block) if block_given?
     end
 
     def abstract(abstraction, properties)
