@@ -3,6 +3,13 @@ require_relative './rules_merger'
 
 module Style
   class Compiler
+    def self.compile_dir(dir)
+      Style::Registry.register_dir(dir)
+      compiler = new
+      Style::Registry.sheets.each { |s| compiler << s }
+      compiler.compile
+    end
+
     def initialize
       @sheets = []
       @rules_resolver = RulesResolver.new
