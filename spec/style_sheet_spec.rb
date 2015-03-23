@@ -96,4 +96,11 @@ describe Style::Sheet do
       "include child rule with #{expected}"
     end
   end
+
+  context 'when registering sheet with registry' do
+    let(:sheet) { Style::Sheet.new(:example) {} }
+    before(:each) { Style::Registry.register(sheet) }
+    subject { Style::Registry.sheets }
+    it { is_expected.to include(sheet)}
+  end
 end
