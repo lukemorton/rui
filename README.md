@@ -25,18 +25,18 @@ features that ruby has always had.
 
 ``` ruby
 Style::Sheet.new(:blog_post) do |s|
-  article do
-    header do
-      title.extend(typography: [:title, :large])
-    end
+  header do
+    title.extend(typography: [:title, :large])
+  end
 
-    content(margin_top: '1.5em').extend(typography: :standard) do
-      p(margin_top: '1.5em')
+  content(margin_top: '1.5em') do |content|
+    content.extend(typography: :standard)
 
-      a(color: :black) do |a|
-        a.hover(color: :red)
-        a.visited(color: :grey)
-      end
+    p(margin_top: '1.5em')
+
+    a(color: :black) do |a|
+      a.hover(color: :red)
+      a.visited(color: :grey)
     end
   end
 
