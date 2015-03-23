@@ -1,7 +1,12 @@
+require_relative './registry'
 require_relative './context'
 
 module Style
   class Sheet
+    def self.register(name, &block)
+      new(name, &block).tap { |sheet| Style::Registry.register(sheet) }
+    end
+
     attr_reader :name
 
     def initialize(name, &block)

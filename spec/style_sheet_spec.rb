@@ -98,9 +98,8 @@ describe Style::Sheet do
   end
 
   context 'when registering sheet with registry' do
-    let(:sheet) { Style::Sheet.new(:example) {} }
-    before(:each) { Style::Registry.register(sheet) }
     subject { Style::Registry.sheets }
-    it { is_expected.to include(sheet)}
+    let(:sheet) { Style::Sheet.register(:example) {} }
+    it { is_expected.to include(sheet) }
   end
 end
