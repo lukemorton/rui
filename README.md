@@ -24,7 +24,7 @@ to manage. Sass and Less are scrambling to implement programming language
 features that ruby has always had.
 
 ``` ruby
-Style::Sheet.new(:blog_post) do |s|
+Style::Sheet.register(:blog_post) do |s|
   header do
     title.extend(typography: [:title, :large])
   end
@@ -52,7 +52,7 @@ The structure of a HTML component is expressed in a concise manner mirroring
 that of the Style Sheet. Many have commented on the eloquence of rui.
 
 ``` ruby
-Component.new(blog_post: :article) do |component, post|
+Component.register(blog_post: :article) do |component, post|
   header do
     title(:h1) { post.title }
   end
