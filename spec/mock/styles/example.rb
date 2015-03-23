@@ -1,4 +1,4 @@
-sheet = Style::Sheet.new(:all) do
+sheet = Style::Sheet.new(:example) do
   section.extend(base: :font)
 end
 
