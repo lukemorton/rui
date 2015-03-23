@@ -41,8 +41,8 @@
 #   </div>
 # </form>
 #
-Component.new(:login_form) do |component, action, user|
-  component.element = { form: { method: :post, action: action } }
+Component.new(login_form: :form) do |component, action, user|
+  component.attributes = { method: :post, action: action }
   component.stylesheet = :standard_form
   component.use(:error_label)
 

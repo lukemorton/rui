@@ -52,9 +52,7 @@ The structure of a HTML component is expressed in a concise manner mirroring
 that of the Style Sheet. Many have commented on the eloquence of rui.
 
 ``` ruby
-Component.new(:blog_post) do |component, post|
-  component.element = :article
-
+Component.new(blog_post: :article) do |component, post|
   header do
     title(:h1) { post.title }
   end
