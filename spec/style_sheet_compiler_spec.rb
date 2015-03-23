@@ -25,7 +25,9 @@ describe Style::Compiler do
               help(display: :block)
             end
 
-            a.when(:visited, color: :grey)
+            a.visited(color: :grey)
+
+            a.when(:active, color: :grey)
           end
         end
 
