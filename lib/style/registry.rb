@@ -21,7 +21,7 @@ module Style
     end
 
     def register_dir(dir)
-      Dir[File.join(dir, '**/*.rb')].each { |f| require f }
+      Dir[File.join(dir, '**/*.rb')].each { |f| load(f) }
     end
 
     alias_method :register, :<<
