@@ -1,5 +1,5 @@
-require_relative './registry'
-require_relative './context'
+require 'style/registry'
+require 'style/context'
 
 module Style
   class Sheet

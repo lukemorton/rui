@@ -1,4 +1,4 @@
-require_relative './context'
+require 'style/context'
 
 module Style
   class Rule < Hash

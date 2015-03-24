@@ -1,5 +1,6 @@
-require_relative './rules_resolver'
-require_relative './rules_merger'
+require 'style/rules_resolver'
+require 'style/rules_merger'
+require 'style/registry'
 
 module Style
   class Compiler
