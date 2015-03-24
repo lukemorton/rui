@@ -25,8 +25,8 @@ describe Style::Compiler do
               help(display: :block)
             end
 
+            a.focus(color: :grey)
             a.visited(color: :grey)
-
             a.when(:active, color: :grey)
           end
         end
