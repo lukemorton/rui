@@ -1,5 +1,5 @@
-require_relative '../../lib/style/sheet'
-require_relative '../../lib/style/compiler'
+require 'style/sheet'
+require 'style/compiler'
 
 describe Style::Compiler do
   let(:compiler) { Style::Compiler.new }

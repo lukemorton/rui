@@ -1,4 +1,4 @@
-require_relative '../../lib/style/compiler'
+require 'style/compiler'
 
 describe Style::Compiler do
   context 'when compiling directory' do

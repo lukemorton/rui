@@ -1,4 +1,4 @@
-require_relative '../lib/style/sheet'
+require 'style/sheet'
 
 describe Style::Sheet do
   context 'when compiled to bytecode' do
